@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import { CATEGORIES, TASKS } from "../data";
 
-function NewTaskForm({onTaskFormSubmit}) {
+function NewTaskForm({ onTaskFormSubmit }) {
 
   const [details, setDetails] = useState();
 
   const [categoryList, setCategoryList] = useState();
 
-  const filteredCategoryList =  CATEGORIES.filter((item) => {
+  const filteredCategoryList = CATEGORIES.filter((item) => {
     return item !== "All"
 
   });
@@ -21,22 +21,23 @@ function NewTaskForm({onTaskFormSubmit}) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newTask = { text: details, categoryList };
+    const newTask = { text: details, category: categoryList };
     onTaskFormSubmit(newTask);
     setDetails("");
     setCategoryList("");
   };
 
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
         Details
-        <input type="text" name="text" onChange={handleDetailsChange}/>
+        <input type="text" name="text" onChange={handleDetailsChange} />
       </label>
       <label>
         Category
         <select name="category" onChange={handleCategoryChange}>
-          {filteredCategoryList.map((item,index) => (
+          <option>Select Category</option>
+          {filteredCategoryList.map((item, index) => (
             <option key={index}>{item}</option>
           ))}
         </select>

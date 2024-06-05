@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -11,35 +11,45 @@ function App() {
 
   const [tasks, setTasks] = useState(TASKS);
 
-  const deleteTask = (taskToDelete,index) => {
+  const deleteTask = (taskToDelete, index) => {
     console.log(taskToDelete);
     console.log(index);
-   // setTasks(tasks.filter(task => task !== taskToDelete));
+    // setTasks(tasks.filter(task => task !== taskToDelete));
     const updatedTasks = tasks.filter((i) => i.text !== taskToDelete.text);
     // Update the state with the new array of tasks
     console.log(updatedTasks);
     setTasks(updatedTasks);
   };
-  
-  function handleCategoryFilter (selectedCategory) {
-    setTasks(TASKS)
-      if (selectedCategory === 'All') {
-        setTasks(TASKS)
-      } else {
-        
-        setTasks(tasks.filter((i) => i.category === selectedCategory));
-      }
+
+  function handleCategoryFilter(selectedCategory, index) {
+
+
+    console.log(tasks)
+
+    if (selectedCategory === 'All')
+    {
+      setTasks(TASKS);
+    } else
+    {
+      setTasks(TASKS.filter((i) => i.category === selectedCategory));
+    }
+
+
+
     console.log(selectedCategory);
   }
   const handleTaskFormSubmit = (newTask) => {
+    console.log(newTask)
+    console.log(tasks)
+
     setTasks([...tasks, newTask]);
   };
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter  handleCategoryFilter={handleCategoryFilter} />
-      <NewTaskForm onTaskFormSubmit={handleTaskFormSubmit}/>
-      <TaskList tasks={tasks} deleteTask={deleteTask} /> 
+      <CategoryFilter handleCategoryFilter={handleCategoryFilter} />
+      <NewTaskForm onTaskFormSubmit={handleTaskFormSubmit} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} />
       {/* 1.Pass the tasks array(it's called TASKS) from data.js to the tracklist component using a prop named task */}
     </div>
   );

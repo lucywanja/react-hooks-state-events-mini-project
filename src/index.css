@@ -148,6 +148,9 @@ h5 {
   filter: brightness(1.2);
 }
 
+  .notselected{
+  background-color: #404e58;
+ }
 button.toggle {
   position: absolute;
   top: 0.5rem;
